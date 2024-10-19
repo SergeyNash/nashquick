@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>SQL Injection - Описание и Защита</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			line-height: 1.6;
+			background-color: #f4f4f4;
+			padding: 20px;
+		}
+
+		h1 {
+			color: #333;
+		}
+
+		h2,
+		h3 {
+			color: #555;
+		}
+
+		code,
+		pre {
+			background-color: #eee;
+			padding: 10px;
+			border-radius: 5px;
+			display: block;
+		}
+
+		ul {
+			list-style-type: disc;
+			padding-left: 20px;
+		}
+
+		.container {
+			max-width: 900px;
+			margin: 0 auto;
+			background: white;
+			padding: 20px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+			border-radius: 8px;
+		}
+
+		.tag {
+			background-color: #007BFF;
+			color: white;
+			padding: 3px 7px;
+			border-radius: 3px;
+			font-size: 12px;
+			display: inline-block;
+			margin-right: 5px;
+		}
+	</style>
+</head>
+
+<body>
+
+	<div class="container">
+		<h1>SQL Injection</h1>
+		<p><strong>Owner:</strong> Sergey SInyakov</p>
+		<p>
+			<span class="tag">Application Firewall</span>
+			<span class="tag">DAST</span>
+			<span class="tag">SAST</span>
+		</p>
+
+		<h2>Общее описание:</h2>
+		<p>SQL Injection (SQLi) - это уязвимость, которая позволяет злоумышленнику внедрить и выполнить произвольные
+			SQL-запросы в базу данных приложения. Эта уязвимость возникает из-за недостаточной фильтрации или
+			экранирования пользовательских данных, используемых в SQL-запросах.</p>
+
+		<h2>1. Что делает?</h2>
+		<p>SQL Injection позволяет злоумышленнику изменять структуру SQL-запросов, выполняемых приложением, вставляя в
+			них вредоносные SQL-коды.</p>
+
+		<h2>2. Как делает?</h2>
+		<p>Злоумышленник вводит вредоносный SQL-код в поле ввода, который затем используется в SQL-запросе без должной
+			фильтрации. Это позволяет изменять выполнение запроса или выполнять дополнительные команды.</p>
+
+		<h2>3. К чему приводит?</h2>
+		<p>SQL Injection может привести к:</p>
+		<ul>
+			<li>Кража, изменение или удаление данных.</li>
+			<li>Неавторизованный доступ к данным.</li>
+			<li>Удаленное выполнение команд на сервере.</li>
+			<li>Полный контроль над базой данных.</li>
+		</ul>
+
+		<h2>4. Какие условия нужны для реализации с примером</h2>
+		<p>Для успешной атаки SQLi необходимо:</p>
+		<ul>
+			<li>Приложение должно использовать SQL-запросы для взаимодействия с базой данных.</li>
+			<li>Пользовательский ввод должен быть встроен в SQL-запрос без должной фильтрации.</li>
+		</ul>
+
+		<p>Пример уязвимого кода на PHP:</p>
+		<pre><code>
+?php
+$username = $_GET['username'];
+$query = "SELECT * FROM users WHERE username = '$username'";
+$result = mysqli_query($conn, $query);
+?>
+        </code></pre>
+
+		<p>Если злоумышленник введет следующий запрос:</p>
+		<pre><code>http://yourwebsite.com/script.php?username=' OR '1'='1</code></pre>
+
+		<p>Это может привести к выполнению запроса:</p>
+		<pre><code>SELECT * FROM users WHERE username = '' OR '1'='1'</code></pre>
+
+		<h2>5. Что делать для предотвращения</h2>
+		<p>Для предотвращения SQL Injection рекомендуется:</p>
+		<ul>
+			<li>Использовать подготовленные выражения (prepared statements) и параметризованные запросы.</li>
+			<li>Применять экранирование и фильтрацию всех входных данных.</li>
+			<li>Ограничивать права доступа к базе данных.</li>
+			<li>Регулярно обновлять и патчить используемое программное обеспечение.</li>
+		</ul>
+
+		<p>Безопасный пример на PHP с использованием подготовленных выражений:</p>
+		<pre><code>
+<?php
+$username = $_GET['username'];
+$stmt = $conn->prepare("SELECT * FROM users WHERE username = ?");
+$stmt->bind_param("s", $username);
+$stmt->execute();
+$result = $stmt->get_result();
+?>
+        </code></pre>
+	</div>
+
+</body>
+
+</html>
