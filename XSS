@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Cross-Site Scripting (XSS) - Описание и Защита</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			line-height: 1.6;
+			background-color: #f4f4f4;
+			padding: 20px;
+		}
+
+		h1 {
+			color: #333;
+		}
+
+		h2,
+		h3 {
+			color: #555;
+		}
+
+		code,
+		pre {
+			background-color: #eee;
+			padding: 10px;
+			border-radius: 5px;
+			display: block;
+		}
+
+		ul {
+			list-style-type: disc;
+			padding-left: 20px;
+		}
+
+		.container {
+			max-width: 900px;
+			margin: 0 auto;
+			background: white;
+			padding: 20px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+			border-radius: 8px;
+		}
+
+		.tag {
+			background-color: #007BFF;
+			color: white;
+			padding: 3px 7px;
+			border-radius: 3px;
+			font-size: 12px;
+			display: inline-block;
+			margin-right: 5px;
+		}
+	</style>
+</head>
+
+<body>
+
+	<div class="container">
+		<h1>Cross-Site Scripting (XSS)</h1>
+		<p><strong>Owner:</strong> Sergey SInyakov</p>
+		<p>
+			<span class="tag">GPT 4</span>
+		</p>
+
+		<h2>Общее описание:</h2>
+		<p>Cross-Site Scripting (XSS) - это уязвимость, которая позволяет злоумышленнику внедрять и выполнять
+			произвольный скрипт на стороне клиента (в браузере пользователя). Это возможно из-за недостаточной
+			фильтрации или экранирования пользовательских данных, отображаемых на веб-странице.</p>
+
+		<h2>1. Что делает?</h2>
+		<p>XSS позволяет злоумышленнику внедрять скрипты в веб-страницу, которые будут выполнены в контексте браузера
+			жертвы. Эти скрипты могут красть данные, изменять отображаемый контент или выполнять действия от имени
+			пользователя.</p>
+
+		<h2>2. Как делает?</h2>
+		<p>Злоумышленник вводит вредоносный скрипт в поле ввода, который затем отображается на веб-странице без должной
+			фильтрации. Этот скрипт выполняется в браузере жертвы при загрузке страницы.</p>
+
+		<h2>3. К чему приводит?</h2>
+		<p>XSS может привести к:</p>
+		<ul>
+			<li>Кража cookie и сессий.</li>
+			<li>Внедрение фальшивых форм и фишинг.</li>
+			<li>Выполнение действий от имени пользователя.</li>
+			<li>Перехват конфиденциальной информации.</li>
+		</ul>
+
+		<h2>4. Какие условия нужны для реализации с примером</h2>
+		<p>Для успешной атаки XSS необходимо:</p>
+		<ul>
+			<li>Приложение должно отображать пользовательские данные на веб-странице.</li>
+			<li>Пользовательский ввод должен быть встроен в HTML-код без должной фильтрации.</li>
+		</ul>
+
+		<p>Пример уязвимого кода на PHP:</p>
+		<pre><code>
+?php
+$username = $_GET['username'];
+echo "Hello, $username!";
+?>
+        </code></pre>
+
+		<p>Если злоумышленник введет следующий запрос:</p>
+		<pre><code>http://yourwebsite.com/script.php?username=&lt;script&gt;alert('XSS');&lt;/script&gt;</code></pre>
+
+		<p>Это приведет к выполнению скрипта <code>alert('XSS');</code> в браузере пользователя.</p>
+
+		<h2>5. Что делать для предотвращения</h2>
+		<p>Для предотвращения XSS рекомендуется:</p>
+		<ul>
+			<li>Использовать функции для экранирования вывода (например, <code>htmlspecialchars</code> в PHP).</li>
+			<li>Применять строгую фильтрацию и валидацию всех входных данных.</li>
+			<li>Использовать Content Security Policy (CSP) для ограничения выполнения скриптов.</li>
+			<li>Регулярно проверять и обновлять код на наличие уязвимостей.</li>
+		</ul>
+
+		<p>Безопасный пример на PHP с использованием экранирования:</p>
+		<pre><code>
+?php
+$username = htmlspecialchars($_GET['username'], ENT_QUOTES, 'UTF-8');
+echo "Hello, $username!";
+?
+        </code></pre>
+	</div>
+
+</body>
+
+</html>
