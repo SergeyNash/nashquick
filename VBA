@@ -1,0 +1,87 @@
+Вот пример кода VBA для PowerPoint, который создаст презентацию на тему кибербезопасности и безопасной разработки в определённом количестве слайдов. Слайды будут включать блок-схемы, изображения и графики со статистикой. Код использует прямые команды для добавления текстов, рисунков и графиков, избегая плейсхолдеров:
+
+```vba
+Sub CreateCybersecurityPresentation()
+
+    Dim pptApp As Object
+    Dim pptPres As Object
+    Dim slideIndex As Integer
+    Dim slide As Object
+    Dim shape As Object
+    
+    ' Создаем новое приложение PowerPoint
+    Set pptApp = CreateObject("PowerPoint.Application")
+    pptApp.Visible = True
+    
+    ' Создаем новую презентацию
+    Set pptPres = pptApp.Presentations.Add
+    
+    ' Количество слайдов
+    Dim numSlides As Integer
+    numSlides = InputBox("Введите количество слайдов:", "Количество слайдов", 5)
+    
+    ' Слайд 1: Заголовок презентации
+    Set slide = pptPres.Slides.Add(1, ppLayoutText)
+    slide.Shapes(1).TextFrame.TextRange.Text = "Кибербезопасность и безопасная разработка"
+    slide.Shapes(2).TextFrame.TextRange.Text = "Презентация о лучших практиках безопасного кода"
+    
+    ' Слайд 2: Блок-схема процесса безопасной разработки
+    Set slide = pptPres.Slides.Add(2, ppLayoutBlank)
+    slide.Shapes.AddTextbox(msoTextOrientationHorizontal, 100, 20, 400, 50).TextFrame.TextRange.Text = "Процесс безопасной разработки"
+    ' Добавление блок-схемы
+    Set shape = slide.Shapes.AddShape(msoShapeFlowchartProcess, 100, 100, 150, 50)
+    shape.TextFrame.TextRange.Text = "Шаг 1: Анализ уязвимостей"
+    Set shape = slide.Shapes.AddShape(msoShapeFlowchartDecision, 300, 100, 150, 50)
+    shape.TextFrame.TextRange.Text = "Шаг 2: Принятие решения"
+    ' Линии между блоками
+    slide.Shapes.AddLine 250, 125, 300, 125
+    slide.Shapes.AddLine 450, 125, 500, 125
+    
+    ' Слайд 3: Картинка для иллюстрации угроз
+    Set slide = pptPres.Slides.Add(3, ppLayoutBlank)
+    slide.Shapes.AddTextbox(msoTextOrientationHorizontal, 100, 20, 400, 50).TextFrame.TextRange.Text = "Угрозы кибербезопасности"
+    ' Добавление изображения
+    slide.Shapes.AddPicture "C:\путь_к_изображению.jpg", _
+        msoFalse, msoCTrue, 100, 100, 500, 300 ' Замените на реальный путь
+    
+    ' Слайд 4: График с анализом статистики
+    Set slide = pptPres.Slides.Add(4, ppLayoutBlank)
+    slide.Shapes.AddTextbox(msoTextOrientationHorizontal, 100, 20, 400, 50).TextFrame.TextRange.Text = "Статистика кибератак"
+    ' Создание графика
+    Dim chartData As Excel.Workbook
+    Dim chartSheet As Excel.Worksheet
+    Set chartData = Workbooks.Add
+    Set chartSheet = chartData.Sheets(1)
+    chartSheet.Cells(1, 1).Value = "Год"
+    chartSheet.Cells(1, 2).Value = "Количество атак"
+    chartSheet.Cells(2, 1).Value = 2020
+    chartSheet.Cells(2, 2).Value = 1000
+    chartSheet.Cells(3, 1).Value = 2021
+    chartSheet.Cells(3, 2).Value = 1500
+    chartSheet.Cells(4, 1).Value = 2022
+    chartSheet.Cells(4, 2).Value = 2000
+    
+    Set shape = slide.Shapes.AddChart2(251, xlColumnClustered, 100, 100, 400, 300)
+    shape.Chart.SetSourceData chartSheet.Range("A1:B4")
+    
+    ' Закрываем временную книгу Excel
+    chartData.Close False
+
+    ' Дополнительные слайды (по необходимости)
+    For slideIndex = 5 To numSlides
+        Set slide = pptPres.Slides.Add(slideIndex, ppLayoutText)
+        slide.Shapes(1).TextFrame.TextRange.Text = "Дополнительная информация - Слайд " & slideIndex
+        slide.Shapes(2).TextFrame.TextRange.Text = "Описание для слайда " & slideIndex
+    Next slideIndex
+
+End Sub
+```
+
+### Описание:
+1. **Слайд 1**: Заголовок презентации.
+2. **Слайд 2**: Блок-схема процесса безопасной разработки.
+3. **Слайд 3**: Добавление изображения (путь к файлу изображения необходимо заменить).
+4. **Слайд 4**: График с анализом статистики кибератак.
+5. **Остальные слайды**: Создаются пустые слайды с текстом по количеству, которое введено пользователем.
+
+Вы можете настроить количество слайдов, содержание и путь к изображению в зависимости от требований.
