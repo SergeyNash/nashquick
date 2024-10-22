@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Резюме менеджера продукта</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Press Start 2P', cursive;
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: #00ff00;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px;
+            background-color: #111;
+            color: #00ff00;
+            border-bottom: 2px solid #00ff00;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        header img {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            margin-top: 10px;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+        }
+
+        .content-section {
+            background-color: #111;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 2px 10px rgba(0, 255, 0, 0.1);
+            border: 2px solid #00ff00;
+        }
+
+        .content-section h2 {
+            color: #ffcc00;
+        }
+
+        .experience-tab {
+            margin-top: 10px;
+            border: 2px solid #00ff00;
+            padding: 15px;
+            background-color: #111;
+            box-shadow: 0 2px 5px rgba(0, 255, 0, 0.3);
+        }
+
+        .experience-tab h3 {
+            font-size: 16px;
+        }
+
+        .emoji {
+            font-size: 20px;
+            margin-right: 10px;
+        }
+
+        /* Панель навыков и публикаций */
+        details {
+            margin-top: 20px;
+            border: 2px solid #00ff00;
+            border-radius: 5px;
+            padding: 10px;
+            background-color: #111;
+            box-shadow: 0px 2px 10px rgba(0, 255, 0, 0.2);
+        }
+
+        summary {
+            font-size: 18px;
+            color: #ffcc00;
+            cursor: pointer;
+        }
+
+        .skills {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .chart-container {
+            width: 400px;
+            height: 400px;
+        }
+
+        /* Прогресс-бар */
+        #progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 20px;
+            background-color: #333;
+            border: 2px solid #00ff00;
+            z-index: 999;
+        }
+
+        #progress-bar-fill {
+            width: 0;
+            height: 100%;
+            background-color: #ffcc00;
+            transition: width 0.5s ease;
+        }
+
+        /* Стиль ссылок */
+        .links a {
+            color: #00ff00;
+            text-decoration: none;
+            border-bottom: 2px dotted #00ff00;
+        }
+
+        .links a:hover {
+            text-decoration: none;
+            color: #ffcc00;
+        }
+
+        /* Секция для фото */
+        .photo-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .photo-container img {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            border: 4px solid #00ff00;
+        }
+    </style>
+</head>
+<body>
+    <!-- Прогресс-бар -->
+    <div id="progress-bar">
+        <div id="progress-bar-fill"></div>
+    </div>
+
+    <header>
+        <h1>Алексей Иванов</h1>
+        <div class="photo-container">
+            <img src="https://via.placeholder.com/150" alt="Фото Алексея Иванова">
+        </div>
+        <p>Менеджер продукта</p>
+        <p><strong>Email:</strong> aleksey.ivanov@example.com | <strong>Телефон:</strong> +7 912 345-67-89</p>
+        <p class="links">
+            <a href="https://www.linkedin.com/in/aleksey-ivanov/" target="_blank">LinkedIn</a> |
+            <a href="https://github.com/aleksey-ivanov" target="_blank">GitHub</a>
+        </p>
+    </header>
+
+    <div class="container">
+        <!-- Опыт работы -->
+        <div class="content-section">
+            <h2>Опыт работы</h2>
+            <div class="experience-tab">
+                <h3><span class="emoji">🛠️</span>Менеджер продукта, Компания XYZ (2020 - настоящее время)</h3>
+                <p>Руководство продуктовой командой, разработка стратегии, внедрение Agile методологии, достижение роста ключевых показателей на 25%.</p>
+            </div>
+            <div class="experience-tab">
+                <h3><span class="emoji">🚀</span>Продакт-менеджер, Стартап ABC (2017 - 2020)</h3>
+                <p>Разработка и вывод на рынок нового продукта, анализ данных пользователей, проведение A/B тестирования.</p>
+            </div>
+            <div class="experience-tab">
+                <h3><span class="emoji">📊</span>Бизнес-аналитик, Компания DEF (2015 - 2017)</h3>
+                <p>Анализ бизнес-процессов, предложение улучшений для оптимизации затрат и увеличения эффективности.</p>
+            </div>
+            <div class="experience-tab">
+                <h3><span class="emoji">💡</span>Ассистент продакт-менеджера, Стартап GHI (2013 - 2015)</h3>
+                <p>Участие в исследованиях рынка, помощь в организации маркетинговых кампаний, поддержка команды разработки.</p>
+            </div>
+        </div>
+
+        <!-- Панель с навыками -->
+        <details>
+            <summary>Навыки</summary>
+            <div class="skills">
+                <div class="chart-container">
+                    <canvas id="productSkills"></canvas>
+                </div>
+                <div class="chart-container">
+                    <canvas id="techSkills"></canvas>
+                </div>
+                <div class="chart-container">
+                    <canvas id="softSkills"></canvas>
+                </div>
+            </div>
+        </details>
+
+        <!-- Панель с публичными выступлениями и публикациями -->
+        <details>
+            <summary>Публичные выступления и публикации</summary>
+            <div class="content-section">
+                <h2>Публичные выступления</h2>
+                <ul>
+                    <li>Конференция "ProductCon", 2022</li>
+                    <li>Выступление на митапе "Agile Product Management", 2021</li>
+                </ul>
+                <h2>Публикации</h2>
+                <ul>
+                    <li>Статья "Как использовать A/B тестирование для роста продукта", Medium, 2020</li>
+                    <li>Интервью для журнала "Product Times", 2019</li>
+                </ul>
+            </div>
+        </details>
+    </div>
+
+    <script>
+        // Прогресс-бар при прокрутке страницы
+        const progressBarFill = document.getElementById('progress-bar-fill');
+
+        window.addEventListener('scroll', () => {
+            const scrolled = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+            progressBarFill.style.width = scrolled + '%';
+        });
+
+        // График навыков менеджера продукта
+        const productSkillsCtx = document.getElementById('productSkills').getContext('2d');
+        const productSkillsChart = new Chart(productSkillsCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Стратегия', 'Аналитика', 'Управление командой', 'Работа с клиентами'],
+                datasets: [{
+                    label: 'Навыки менеджера продукта',
+                    data: [80, 70, 90, 85],
+                    backgroundColor: ['#ffcc00', '#007bff', '#28a745', '#dc3545'],
+                }]
+            }
+        });
+
+        // График технических навыков
+        const techSkillsCtx = document.getElementById('techSkills').getContext('2d');
+        const techSkillsChart = new Chart(techSkillsCtx, {
+            type: 'bar',
+            data: {
+                labels: ['SQL', 'Python', 'HTML/CSS', 'JavaScript'],
+                datasets: [{
+                    label: 'Технические навыки',
+                    data: [70, 60, 85, 80],
+                    backgroundColor: ['#ffcc00', '#007bff', '#28a745', '#dc3545'],
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // График soft skills
+        const softSkillsCtx = document.getElementById('softSkills').getContext('2d');
+        const softSkillsChart = new Chart(softSkillsCtx, {
+            type: 'radar',
+            data: {
+                labels: ['Коммуникация', 'Управление временем', 'Креативность', 'Эмпатия'],
+                datasets: [{
+                    label: 'Soft Skills',
+                    data: [90, 80, 75, 85],
+                    backgroundColor: 'rgba(255, 204, 0, 0.2)',
+                    borderColor: '#ffcc00',
+                }]
+            }
+        });
+    </script>
+</body>
+</html>
