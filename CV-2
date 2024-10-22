@@ -14,7 +14,23 @@
             background-color: #000;
             color: #00ff00;
         }
+body::before {
+    content: '';
+    position: fixed; /* Заменено на fixed, чтобы фон оставался на месте */
+    top: 0;
+    left: 0;
+    width: 200%; /* Растягиваем на всю ширину */
+    height: 100vh; /* Занимает высоту всего экрана */
+    background: url('https://i.imgur.com/O2i7ahY.gifhttps://i.imgur.com/O2i7ahY.gif') repeat-x; /* Фон в стиле Super Mario */
+    background-size: contain; /* Масштабируем фон */
+    animation: scrollBackground 20s linear infinite;
+    z-index: -1; /* Помещаем фон под основной контент */
+}
 
+@keyframes scrollBackground {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
         header {
             text-align: center;
             padding: 20px;
