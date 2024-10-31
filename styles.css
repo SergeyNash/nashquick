@@ -57,8 +57,8 @@ body {
 }
 
 #messages {
-  width: 500px; /* Увеличена ширина в два раза */
-  height: 600px;
+  width: 600px; /* Увеличена ширина в два раза */
+  height: 610px;
   padding: 20px;
   background-color: #f0f0f0;
   border-left: 1px solid #ddd;
