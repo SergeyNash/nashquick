@@ -1,0 +1,55 @@
+/* styles.css */
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+#game-container {
+  display: flex;
+  border: 1px solid #ccc;
+}
+
+#info-panel {
+  width: 200px;
+  padding: 20px;
+  background-color: #f0f0f0;
+  border-right: 1px solid #ddd;
+}
+
+#mapCanvas {
+  width: 600px;
+  height: 600px;
+  background-image: url('images/background.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+#messages {
+  width: 400px; /* Увеличена ширина в два раза */
+  padding: 20px;
+  background-color: #f0f0f0;
+  border-left: 1px solid #ddd;
+  overflow-y: auto;
+  max-height: 600px;
+}
+
+/* Стиль для заголовков и абзацев в описании */
+
+#messages h2 {
+  margin-top: 0;
+  color: #333;
+}
+
+#messages p, #messages li {
+  margin-bottom: 1em;
+  line-height: 1.5;
+}
+
+#messages ol {
+  padding-left: 20px;
+  margin-bottom: 1em;
+}
