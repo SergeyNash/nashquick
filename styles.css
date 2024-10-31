@@ -17,7 +17,7 @@ body {
   width: 200px;
   height: 600px;
   padding: 0px;
-  background-color: #00f0f0;
+  background-color: #f0f0f0;
   border-right: 1px solid #ddd;
     font-family: 'Press Start 2P', cursive;
   font-size: 10px; /* Подберите подходящий размер для 8-битного стиля */
@@ -57,9 +57,9 @@ body {
 }
 
 #messages {
-  width: 600px; /* Увеличена ширина в два раза */
+  width: 800px; /* Увеличена ширина в два раза */
   height: 600px;
-  padding: 20px;
+  padding: 0px;
   background-color: #f0f0f0;
   border-left: 1px solid #ddd;
   overflow-y: auto;
