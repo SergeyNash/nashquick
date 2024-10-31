@@ -73,13 +73,13 @@ body {
 /* Стиль для заголовков и абзацев в описании */
 
 #messages h2 {
-  margin-top: 0;
+  margin-top: 10;
   color: #333;
 }
 
 #messages p, #messages li {
   margin-bottom: 1em;
-  line-height: 1;
+  line-height: 1.5;
 }
 
 #messages ol {
