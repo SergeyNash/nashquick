@@ -16,6 +16,7 @@ body {
 
 #info-panel {
   width: 200px;
+  height: 600px;
   padding: 20px;
   background-color: #f0f0f0;
   border-right: 1px solid #ddd;
@@ -32,6 +33,7 @@ body {
 
 #messages {
   width: 600px; /* Увеличена ширина в два раза */
+  height: 600px;
   padding: 20px;
   background-color: #f0f0f0;
   border-left: 1px solid #ddd;
