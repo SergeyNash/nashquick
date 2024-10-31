@@ -6,7 +6,6 @@ body {
   align-items: center;
   height: 100vh;
   margin: 0;
-  font-family: 'Press Start 2P', sans-serif;
 }
 
 #game-container {
@@ -16,12 +15,38 @@ body {
 
 #info-panel {
   width: 200px;
-  height: 600px;
+  height: 500px;
   padding: 20px;
-  background-color: #f0f0f0;
+  background-color: #00f0f0;
   border-right: 1px solid #ddd;
-  font-family: 'Press Start 2P', sans-serif;
+    font-family: 'Press Start 2P', cursive;
+  font-size: 10px; /* Подберите подходящий размер для 8-битного стиля */
+  color: #333; /* Можно поменять цвет по вашему вкусу */
+  line-height: 1; /* Настройка межстрочного интервала */
 }
+
+
+#profile-section {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+#profile-pic {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+#profile-section p {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 10px;
+  color: #333;
+  line-height: 1.2;
+  margin: 0;
+}
+
+
 
 #mapCanvas {
   width: 600px;
@@ -32,16 +57,17 @@ body {
 }
 
 #messages {
-  width: 600px; /* Увеличена ширина в два раза */
-  height: 600px;
+  width: 500px; /* Увеличена ширина в два раза */
+  height: 550px;
   padding: 20px;
   background-color: #f0f0f0;
   border-left: 1px solid #ddd;
   overflow-y: auto;
   max-height: 600px;
-  font-family: 'Press Start 2P', sans-serif;
-  font-size: 12px;
-  line-height: 1.5;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 12px; /* Подберите подходящий размер для 8-битного стиля */
+  color: #333; /* Можно поменять цвет по вашему вкусу */
+  line-height: 1; /* Настройка межстрочного интервала */
 }
 
 /* Стиль для заголовков и абзацев в описании */
