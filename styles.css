@@ -15,8 +15,8 @@ body {
 
 #info-panel {
   width: 200px;
-  height: 500px;
-  padding: 20px;
+  height: 600px;
+  padding: 0px;
   background-color: #00f0f0;
   border-right: 1px solid #ddd;
     font-family: 'Press Start 2P', cursive;
