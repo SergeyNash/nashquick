@@ -1,17 +1,32 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <!-- VT323 -->
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    
+    <!-- Silkscreen -->
+    <link href="https://fonts.googleapis.com/css2?family=Silkscreen&display=swap" rel="stylesheet">
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Браузерная Игра</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div id="game-container">
-    <div id="info-panel">
-      <h2>Информация и Легенда</h2>
-      <p>Общая информация о карте и зоне.</p>
-    </div>
+  
+  <div id="info-panel">
+  <h2>Информация и Легенда</h2>
+  <div id="profile-section">
+    <img src="images/profile-pic.png" alt="Profile Image" id="profile-pic">
+    <p><strong>Имя Фамилия</strong></p>
+    <p>Email: example@mail.com</p>
+    <p>Телефон: +7 (123) 456-78-90</p>
+  </div>
+  <p>Общая информация о карте и зоне.</p>
+</div>
+  
+  
     <canvas id="mapCanvas"></canvas>
     <div id="messages"><p>Вы не в зоне опыта.</p></div>
   </div>
