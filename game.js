@@ -6,6 +6,58 @@ canvas.width = canvas.clientWidth;
 canvas.height = canvas.clientHeight;
 
 
+document.addEventListener('DOMContentLoaded', () => {
+  const introOverlay = document.getElementById('intro-overlay');
+  const introVideo = document.getElementById('intro-video');
+  const progressFill = document.getElementById('progress-fill');
+  const progressText = document.getElementById('progress-text');
+  const startMessage = document.getElementById('start-message');
+  const introMusic = document.getElementById('intro-music');
+  const gameMusic = document.getElementById('game-music');
+
+  // Запуск анимации прогресс-бара
+  setTimeout(() => {
+    progressFill.style.width = '100%';
+  }, 100);
+
+  // Обновление текста процентов
+  let percent = 0;
+  const interval = setInterval(() => {
+    percent += 1;
+    progressText.textContent = `${percent}%`;
+    if (percent === 100) {
+      clearInterval(interval);
+      showStartMessage(); // Показ сообщения после 100%
+    }
+  }, 40);
+
+  // Показ мигающей надписи "PRESS SPACE TO START"
+  function showStartMessage() {
+    startMessage.classList.add('visible');
+  }
+
+  // Запуск игры по нажатию пробела
+  function startGame(event) {
+    if (event.code === 'Space') {
+      introOverlay.style.display = 'none';
+      introMusic.pause();  // Останавливаем музыку заставки
+      gameMusic.play();    // Воспроизводим музыку для игры
+      document.removeEventListener('keydown', startGame);
+    }
+  }
+
+  // Скрытие заставки и активация сообщения о старте после окончания видео
+  introVideo.onended = showStartMessage;
+  setTimeout(showStartMessage, 4000);
+
+  // Добавляем обработчик события для запуска игры
+  document.addEventListener('keydown', startGame);
+});
+
+
+
+
+
 // Настройки персонажа
 let player = { x: 300, y: 200, size: 80, speed: 15, imageSrc: 'images/player.png' };
 const playerImage = new Image();
