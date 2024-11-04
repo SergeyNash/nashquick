@@ -203,7 +203,7 @@ const zones = [
 <li>Для новых продуктов формирование scope, определение MVP совместно с CPO\PO, c учетом имеющихся ограничений ресурсов и последовательного развития продукта</li>
       <p></p>`,
     active: false,
-    imgSrc: 'images/zone3.png'
+    //imgSrc: 'images/zone3.png'
   },
   {
     x: 48, y: 250, size: 140,
@@ -230,7 +230,7 @@ const zones = [
 
       <p></p>`,
     active: false,
-    imgSrc: 'images/zone14.png'
+  //  imgSrc: 'images/zone14.png'
   }
 ];
 
