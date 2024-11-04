@@ -4,7 +4,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <!-- VT323 -->
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
-    
+      <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400&display=swap" rel="stylesheet">
+
     <!-- Silkscreen -->
     <link href="https://fonts.googleapis.com/css2?family=Silkscreen&display=swap" rel="stylesheet">
 
@@ -15,7 +16,7 @@
 </head>
 <body>
 
-      <div id="intro-overlay">
+  <div id="intro-overlay">
     <video id="intro-video" autoplay muted>
       <source src="images/intro.mp4" type="video/mp4">
       Ваш браузер не поддерживает видео.
@@ -27,26 +28,35 @@
     </div>
     <div id="start-message">PRESS SPACE TO START</div>
     <audio id="intro-music" autoplay loop>
-      <source src="audio/intro-music.mp3" type="audio/mpeg">
+      <source src="audio/intro.mp3" type="audio/mpeg">
       Ваш браузер не поддерживает аудио.
     </audio>
   </div>
-  
-  <div id="info-panel">
-  <h2>Добро пожаловать</h2>
+
+	
+	<div id="info-panel">
+  <h2>Информация и Легенда</h2>
   <div id="profile-section">
     <img src="images/profile-pic.png" alt="Profile Image" id="profile-pic">
-    <p><strong>Сергей Синяков</strong></p>
+    <p><strong>Имя Фамилия</strong></p>
     <p>Email: example@mail.com</p>
     <p>Телефон: +7 (123) 456-78-90</p>
   </div>
   <p>Общая информация о карте и зоне.</p>
 </div>
-  
-  
+	
+	
     <canvas id="mapCanvas"></canvas>
     <div id="messages"><p>Вы не в зоне опыта.</p></div>
   </div>
+  
+   <!-- Основная музыка для игры -->
+  <audio id="game-music" loop>
+    <source src="audio/game-music.mp3" type="audio/mpeg">
+    Ваш браузер не поддерживает аудио.
+  </audio>
+  
+  
   <script src="game.js"></script>
 </body>
 </html>
