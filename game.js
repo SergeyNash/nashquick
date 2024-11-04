@@ -4,7 +4,16 @@ const canvas = document.getElementById('mapCanvas');
 const ctx = canvas.getContext('2d');
 canvas.width = canvas.clientWidth;
 canvas.height = canvas.clientHeight;
-
+/*
+document.addEventListener('DOMContentLoaded', () => {
+  const introOverlay = document.getElementById('intro-overlay');
+  const introVideo = document.getElementById('intro-video');
+  
+  introVideo.onended = () => {
+    introOverlay.style.display = 'none';
+  };
+});
+*/
 
 document.addEventListener('DOMContentLoaded', () => {
   const introOverlay = document.getElementById('intro-overlay');
@@ -14,6 +23,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const startMessage = document.getElementById('start-message');
   const introMusic = document.getElementById('intro-music');
   const gameMusic = document.getElementById('game-music');
+  
+  // Флаг для отслеживания запуска музыки
+  let musicStarted = false;
+
+//const messages = document.getElementById('messages');
+//const defaultBackground = 'url("images/messages-background.jpg")'; // Путь к дефолтному фону
+
+
+//----------------
+
+
+//--------------------------------------------
+
 
   // Запуск анимации прогресс-бара
   setTimeout(() => {
@@ -39,20 +61,37 @@ document.addEventListener('DOMContentLoaded', () => {
   // Запуск игры по нажатию пробела
   function startGame(event) {
     if (event.code === 'Space') {
-      introOverlay.style.display = 'none';
-      introMusic.pause();  // Останавливаем музыку заставки
-      gameMusic.play();    // Воспроизводим музыку для игры
-      document.removeEventListener('keydown', startGame);
+      // Воспроизведение музыки заставки после первого взаимодействия
+      if (!musicStarted) {
+        introMusic.play();
+        musicStarted = true;
+      } else {
+        introOverlay.style.display = 'none';
+        introMusic.pause();  // Останавливаем музыку заставки
+        gameMusic.play();    // Воспроизводим музыку для игры
+        document.removeEventListener('keydown', startGame);
+      }
     }
   }
 
-  // Скрытие заставки и активация сообщения о старте после окончания видео
-  introVideo.onended = showStartMessage;
+  // Настройка видео на повтор 10 раз
+  let videoRepeatCount = 0;
+  introVideo.onended = () => {
+    if (videoRepeatCount < 9) { // Повторяем 10 раз
+      introVideo.play();
+      videoRepeatCount++;
+    } else {
+      showStartMessage(); // Показываем сообщение после 10 повторений
+    }
+  };
+
+  // Показ сообщения после 4 секунд, если видео короче
   setTimeout(showStartMessage, 4000);
 
   // Добавляем обработчик события для запуска игры
   document.addEventListener('keydown', startGame);
 });
+
 
 
 
@@ -99,11 +138,58 @@ function drawWalls() {
 // Зоны с описанием и статусом активности
 const zones = [
   {
-    x: 0, y: 0, size: 170,
+    x: 45, y: 20, size: 140,
     description: `
-      <h2>ИНГОССТРАХ</h2>
-      <h3>Product Owner</h3>
-      <ol>
+ <h2>Positive Technologies</h2>
+ <h3>Product Owner</h3>
+ 
+ <h3>Управление продуктами: PT Black Box, PT Application Inspector.</h3>
+
+ <h3>Для обоих продуктов:</h3>
+
+<li>Разработка стратегии продукта, его позиционирования и тактического плана реализации</li>
+<li>Формирование и управление бэклогом на основе бизнес-целей и пользовательских потребностей</li>
+<li>Проведение исследований рынка и анализа конкурентов для выявления новых возможностей</li>
+<li>Координация работы команд разработки, DevSecOps для интеграции решений как в компаниях клиентов, так и внутри</li>
+<li>Участие в создании Roadmap для вывода новых фичей и улучшения существующего функционала</li>
+<li>Взаимодействие с ключевыми заказчиками для сбора требований и получения обратной связи</li>
+<li>Проведение демо-презентаций продукта для внутренней и внешней аудитории</li>
+<li>Построение долгосрочных планов развития продукта, внедрение инноваций и решений</li>
+<li>Сотрудничество с командой маркетинга для формирования предложений и целевых кампаний</li>
+<li>Управление приоритетами и выстраивание гибких процессов для своевременных релизов</li>
+<li>Для PT Black Box рост продаж на 200%, а также продление всех текущих клиентов за счёт реализации ключевого функционала в продукте</li> 
+
+<li>Обновление и перезепуск облачного сканера уязвимостей</li>
+	  
+      <p></p>`,
+	  active: false,
+    //imgSrc: 'images/zone1.png',
+    background: 'url("images/zone1.gif")' // Фон для messages
+  },
+  {
+    x: 426, y: 250, size: 140,
+    description: `
+ <h2>ИМПЭКС ЭЛЕКТРО</h2>
+ <h3>Ведущий специалист по Автоматизированным Системам Управления</h3>
+ <li>Разработка проектов для для АСУ ТП</li>
+ <li>Сбор и анализ данных от Заказчика</li>
+ <li>Написание задания для разработки (ТЗ)</li>
+ <li>Управление проектами по разработке систем для АСУ ТП (рабочие группы программистов от 2 до 8 человек)</li>
+ <li>Управление проектами по разработке принципиальных схем НКУ (рабочие группы проектировщиков от 2 до 4 человек)</li>
+ <li>Разработка и внедрение новых технических решений</li>
+ <li>Переговоры с Заказчиком, техническое сопровождение проектов</li>
+ <li>Переговоры с поставщиками оборудования для автоматизации</li>
+ <li>Работа с подрядными организациями в рамках монтажных и пусконаладочных работ</li>
+ <p></p>`,
+    active: false,
+    imgSrc: 'images/zone12.png'
+  },
+  {
+    x: 410, y: 20, size: 140,
+    description: `
+<h2>ИНГОССТРАХ</h2>
+<h3>Product Owner</h3>
+<ol>
 <li>Реализация нового сайта в качестве CPO/PM (5 продуктовых команд + 1 платформенная команда, работа по SAFe, в SCRUM)</li>
 <li>Определение ключевых критериев успешности сайта (метрик), сайта, как продукта на короткой, средней и длинной дистанции</li>
 <li>По факту реализации: увеличение скорости загрузки сайта, рост MAU, увеличение среднего чека, увеличение сборов, оптимизация клиентских путей (CJM) и увеличение конверсий онлайн продуктов. Также сокращение Time to Market для реализации онлайн продуктов и сервисов</li>
@@ -130,37 +216,16 @@ const zones = [
 <li>Формирование видения развития продукта и roadmap на ближайшие 3-4 спринта (квартал-полугодие)</li>
 <li>Определение критериев приёмки по каждой EPIC\Feature\Story</li>
 <li>Для новых продуктов формирование scope, определение MVP совместно с CPO\PO, c учетом имеющихся ограничений ресурсов и последовательного развития продукта</li>
-	  
       <p></p>`,
     active: false,
-    imgSrc: 'images/zone1.png'
+    imgSrc: 'images/zone3.png'
   },
   {
-    x: 400, y: 430, size: 190,
+    x: 48, y: 250, size: 140,
     description: `
-      <h2>ИМПЭКС ЭЛЕКТРО</h2>
-      <h3>Ведущий специалист по Автоматизированным Системам Управления</h3>
-      
- <li>Разработка проектов для для АСУ ТП</li>
- <li>Сбор и анализ данных от Заказчика</li>
- <li>Написание задания для разработки (ТЗ)</li>
- <li>Управление проектами по разработке систем для АСУ ТП (рабочие группы программистов от 2 до 8 человек)</li>
- <li>Управление проектами по разработке принципиальных схем НКУ (рабочие группы проектировщиков от 2 до 4 человек)</li>
- <li>Разработка и внедрение новых технических решений</li>
- <li>Переговоры с Заказчиком, техническое сопровождение проектов</li>
- <li>Переговоры с поставщиками оборудования для автоматизации</li>
- <li>Работа с подрядными организациями в рамках монтажных и пусконаладочных работ</li>
-      
-      <p>Здесь также применены передовые практики разработки.</p>`,
-    active: false,
-    imgSrc: 'images/zone2.png'
-  },
-  {
-    x: 370, y: 0, size: 230,
-    description: `
-      <h2>МНПП АНТРАКС</h2>
-      <h3>Руководитель отдела разработки ПО / Product owner</h3>
-	  <li>Создание системы мониторинга на базе CRM для приборов</li>
+<h2>МНПП АНТРАКС</h2>
+<h3>Руководитель отдела разработки ПО / Product owner</h3>
+<li>Создание системы мониторинга на базе CRM для приборов</li>
 <li>Рефакторинг решения и добавление функциональности</li>
 <li>Реализация формирование и отображение повреждённого участка линии электропередачи</li>
 <li>Увеличение числа пользователей на 50%</li>
@@ -177,22 +242,10 @@ const zones = [
 <li>Тестирование гипотез</li>
 <li>UX-исследования</li>
 <li>Найм, онбординг и адаптация, перформанс-ревью и грейдирование, обучение и развитие разработчиков в зависимости от направления</li>
+
       <p></p>`,
     active: false,
-    imgSrc: 'images/zone3.png'
-  },
-  {
-    x: 1, y: 389, size: 210,
-    description: `
-      <h2>Опыт работы в зоне 4</h2>
-      <p>Поддержка проектов:</p>
-      <ol>
-        <li>Разработка инновационных решений.</li>
-        <li>Управление проектами в условиях высокой нагрузки.</li>
-      </ol>
-      <p>Завершение крупных проектов.</p>`,
-    active: false,
-    imgSrc: 'images/zone4.png'
+    imgSrc: 'images/zone14.png'
   }
 ];
 
@@ -211,11 +264,13 @@ function movePlayer(direction) {
   let oldX = player.x;
   let oldY = player.y;
 
-  if (direction === 'ArrowUp') player.y -= player.speed;
-  if (direction === 'ArrowDown') player.y += player.speed;
-  if (direction === 'ArrowLeft') player.x -= player.speed;
-  if (direction === 'ArrowRight') player.x += player.speed;
+  // Передвижение персонажа
+  if (direction === 'ArrowUp' && player.y > 0) player.y -= player.speed;
+  if (direction === 'ArrowDown' && player.y + player.size < canvas.height) player.y += player.speed;
+  if (direction === 'ArrowLeft' && player.x > 0) player.x -= player.speed;
+  if (direction === 'ArrowRight' && player.x + player.size < canvas.width) player.x += player.speed;
 
+  // Проверка на столкновение со стенами
   if (isCollidingWithWall()) {
     player.x = oldX;
     player.y = oldY;
